@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "mcfktools",
+  "version": "${version}",
+  "name": "MCFK Tools",
+  "description": "Cúp 3x3, xẻng 3x3, rìu chặt cả cây, xô nước vô hạn và Veinminer tùy chỉnh.",
+  "authors": ["MCFK"],
+  "license": "MIT",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "==26.1.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
