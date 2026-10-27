@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "mcfktools",
+  "version": "${version}",
+  "name": "MCFK Tools",
+  "description": "Cúp 3x3, xẻng 3x3, rìu chặt cả cây và xô nước vô hạn.",
+  "authors": ["Nakasaki"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["vn.mcfk.tools.McfkTools"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
