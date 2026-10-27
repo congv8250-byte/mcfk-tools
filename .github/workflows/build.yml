@@ -36,7 +36,7 @@ jobs:
       - name: Ghép code mod vào template
         run: |
           rm -rf /tmp/tpl/.git /tmp/tpl/src
-          cp -r "$GITHUB_WORKSPACE/mod/src" /tmp/tpl/src
+          cp -r "$GITHUB_WORKSPACE/mod26/src" /tmp/tpl/src
           sed -i 's/^archives_base_name.*/archives_base_name=mcfktools/' /tmp/tpl/gradle.properties
           sed -i "s/^mod_version.*/mod_version=1.0.0+$MC/" /tmp/tpl/gradle.properties
 
@@ -44,7 +44,12 @@ jobs:
         working-directory: /tmp/tpl
         run: |
           chmod +x gradlew
-          ./gradlew build --stacktrace
+          ./gradlew build --stacktrace > /tmp/build.log 2>&1 || {
+            grep -E "\.java:[0-9]+: error" /tmp/build.log | sed 's/^/::error::/'
+            grep -A4 "What went wrong" /tmp/build.log | head -12 | sed 's/^/::error::/'
+            tail -n 25 /tmp/build.log
+            exit 1
+          }
 
       - name: Gom file jar
         run: |
