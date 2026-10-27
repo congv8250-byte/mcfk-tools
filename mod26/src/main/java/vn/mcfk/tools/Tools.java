@@ -51,7 +51,7 @@ public enum Tools {
     public boolean matches(ItemStack s) {
         if (s == null || s.isEmpty()) return false;
         CustomData cd = s.get(DataComponents.CUSTOM_DATA);
-        return cd != null && cd.contains(key);
+        return cd != null && cd.copyTag().contains(key);
     }
 
     public static Tools byArg(String a) {
