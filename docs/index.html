@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCFK Tools - Tải mod</title>
+<style>
+:root{--bg:#0f1115;--card:#181b22;--text:#e8eaf0;--mute:#9aa3b5;--acc:#3ddc97;--line:#2a2f3a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Roboto,sans-serif;line-height:1.6}
+main{max-width:760px;margin:0 auto;padding:32px 18px 60px}
+h1{margin:0 0 6px;font-size:2rem}
+.sub{color:var(--mute);margin:0 0 24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.dl{display:flex;gap:12px;flex-wrap:wrap}
+.btn{flex:1 1 220px;display:block;text-align:center;background:var(--acc);color:#07140d;font-weight:700;text-decoration:none;padding:16px;border-radius:12px;font-size:1.05rem}
+.btn small{display:block;font-weight:500;opacity:.75}
+code{background:#10131a;border:1px solid var(--line);padding:1px 6px;border-radius:6px}
+ul,ol{padding-left:22px}
+.note{color:var(--mute);font-size:.95rem}
+</style>
+</head>
+<body>
+<main>
+  <h1>MCFK Tools</h1>
+  <p class="sub">Cúp 3x3, xẻng 3x3, rìu chặt cả cây, xô nước vô hạn và Veinminer tùy chỉnh.</p>
+
+  <div class="card">
+    <div class="dl">
+      <a class="btn" href="https://github.com/congv8250-byte/mcfk-tools/releases/download/latest-build/mcfktools-26.1.2.jar">Tải cho 26.1.2<small>mcfktools-26.1.2.jar</small></a>
+      <a class="btn" href="https://github.com/congv8250-byte/mcfk-tools/releases/download/latest-build/mcfktools-26.2.jar">Tải cho 26.2<small>mcfktools-26.2.jar</small></a>
+    </div>
+    <p class="note">Chọn đúng phiên bản Minecraft của bạn. Cần Fabric Loader 0.19.3 trở lên, Fabric API và Java 25.</p>
+  </div>
+
+  <div class="card">
+    <h3>Cài đặt</h3>
+    <ol>
+      <li>Cài Fabric Loader đúng phiên bản Minecraft.</li>
+      <li>Bỏ Fabric API và file mcfktools vào thư mục <code>mods</code> (máy chơi hoặc máy chủ).</li>
+      <li>Vào game, gõ <code>/tools</code>.</li>
+    </ol>
+    <p class="note">Nếu cài trên máy chủ thì người chơi không cần cài mod vẫn dùng được.</p>
+  </div>
+
+  <div class="card">
+    <h3>Tính năng và lệnh</h3>
+    <ul>
+      <li>Cúp 3x3 và xẻng 3x3 (giữ Shift để đào 1 block)</li>
+      <li>Rìu chặt cả cây</li>
+      <li>Xô nước vô hạn</li>
+      <li>Veinminer: <code>/veinminer gui</code>, <code>/veinminer range</code>, <code>/veinminer max</code>, <code>/veinminer mode</code></li>
+      <li>Lấy đồ: <code>/tools</code> hoặc <code>/congcu</code></li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>
