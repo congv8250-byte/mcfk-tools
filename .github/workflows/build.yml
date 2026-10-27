@@ -1,0 +1,67 @@
+name: build
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      MC: "26.2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Lấy template Fabric chính thức cho 26.2
+        run: |
+          if git clone --depth 1 --branch "$MC" https://github.com/FabricMC/fabric-example-mod.git /tmp/tpl; then
+            echo "Dùng nhánh $MC của template"
+          else
+            git clone --depth 1 https://github.com/FabricMC/fabric-example-mod.git /tmp/tpl
+            echo "Không có nhánh $MC, dùng nhánh mặc định của template"
+          fi
+          cat /tmp/tpl/gradle.properties
+          tr -d ' \r' < /tmp/tpl/gradle.properties | grep -Fxq "minecraft_version=$MC" || {
+            echo "::error::Template Fabric hiện không phải bản $MC. Gửi dòng minecraft_version ở trên cho trợ lý để chỉnh."
+            exit 1
+          }
+
+      - name: Ghép code mod vào template
+        run: |
+          rm -rf /tmp/tpl/.git /tmp/tpl/src
+          cp -r "$GITHUB_WORKSPACE/mod/src" /tmp/tpl/src
+          sed -i 's/^archives_base_name.*/archives_base_name=mcfktools/' /tmp/tpl/gradle.properties
+          sed -i "s/^mod_version.*/mod_version=1.0.0+$MC/" /tmp/tpl/gradle.properties
+
+      - name: Build
+        working-directory: /tmp/tpl
+        run: |
+          chmod +x gradlew
+          ./gradlew build --stacktrace
+
+      - name: Gom file jar
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/dist"
+          JAR=$(ls /tmp/tpl/build/libs/*.jar | grep -v -- '-sources' | head -1)
+          cp "$JAR" "$GITHUB_WORKSPACE/dist/mcfktools-$MC.jar"
+          ls -l "$GITHUB_WORKSPACE/dist"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mcfktools-26.2
+          path: dist/*.jar
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-build
+          name: MCFK Tools 26.2 (bản mới nhất)
+          body: "File jar tự động build cho Minecraft 26.2."
+          files: dist/*.jar
+          make_latest: true
